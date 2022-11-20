@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+  }
+}
+
+/* Accordion */
+.acc-accent {
+  @apply font-bold mb-2;
+}
+.acc-blockquote {
+  @apply italic m-2;
+}
+.acc-container {
+  @apply mb-4;
+}
