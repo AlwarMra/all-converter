@@ -6,6 +6,7 @@ import { RGBToHex, RGBToHSL, RGBToHSV } from '../../utils/colors/rgbToAll'
 import { HSLToHex, HSLToHSV, HSLtoRGB } from '../../utils/colors/hslToAll'
 import { HSVToHEX, HSVToHSL, HSVToRGB } from '../../utils/colors/hsvToAll'
 import { HEXToHSL, HEXToHSV, HEXToRGB } from '../../utils/colors/hexToAll'
+import Title from '../../components/Title'
 
 enum colorCode {
   RGB = 'RGB',
@@ -141,392 +142,430 @@ const Colors: React.FC = () => {
   const hex = state.HEX
 
   return (
-    <div className='max-w-5xl m-4'>
-      <h1 className='bold text-3xl mb-4'>Color conversion</h1>
-      <ul className='space-y-1 list-disc list-inside mb-8'>
-        <li>HEX value takes 6 digits (rrggbb).</li>
-        <li>RGB values are on range [0-255].</li>
-        <li>
-          HSV values are on range [0-360] for hue, [0-100] for saturation and
-          [0-100] for value.
-        </li>
-        <li>
-          HSL values are on range [0-360] for hue, [0-100] for saturation and
-          [0-100] for lightness.
-        </li>
-      </ul>
-      <Conversor>
-        <Conversor.Group type={colorCode.HEX} title={colorCode.HEX}>
-          <Conversor.InputText
-            name={colorCode.HEX}
-            value={hex}
-            type={colorCode.HEX}
-            max={6}
-            dispatch={dispatch}
-          />
-        </Conversor.Group>
-        <Conversor.Group
-          title={colorCode.RGB + ' (R,G,B)'}
-          type={colorCode.RGB}
-        >
-          <Conversor.InputNumber
-            name='r'
-            value={rgb.r}
-            max={255}
+    <div className='max-w-5xl p-4 my-4 grid gap-4 mx-auto grid-cols-1 md:grid-cols-3'>
+      <div className='col-span-2'>
+        <Title>
+          <>Color conversion</>
+        </Title>
+        <ul className='space-y-1 list-disc list-inside mb-8'>
+          <li>HEX value takes 6 digits (rrggbb).</li>
+          <li>RGB values are on range [0-255].</li>
+          <li>
+            HSV values are on range [0-360] for hue, [0-100] for saturation and
+            [0-100] for value.
+          </li>
+          <li>
+            HSL values are on range [0-360] for hue, [0-100] for saturation and
+            [0-100] for lightness.
+          </li>
+        </ul>
+        <Conversor>
+          <Conversor.Group type={colorCode.HEX} title={colorCode.HEX}>
+            <Conversor.InputText
+              name={colorCode.HEX}
+              value={hex}
+              type={colorCode.HEX}
+              max={6}
+              dispatch={dispatch}
+            />
+          </Conversor.Group>
+          <Conversor.Group
+            title={colorCode.RGB + ' (R,G,B)'}
             type={colorCode.RGB}
-            dispatch={dispatch}
-          />
-          <Conversor.InputNumber
-            name='g'
-            value={rgb.g}
-            max={255}
-            type={colorCode.RGB}
-            dispatch={dispatch}
-          />
-          <Conversor.InputNumber
-            name='b'
-            value={rgb.b}
-            max={255}
-            type={colorCode.RGB}
-            dispatch={dispatch}
-          />
-        </Conversor.Group>
-        <Conversor.Group
-          title={colorCode.HSV + ' (H,S,V)'}
-          type={colorCode.HSV}
-        >
-          <Conversor.InputNumber
-            name='h'
-            value={hsv.h}
-            max={360}
-            type={colorCode.HSV}
-            dispatch={dispatch}
-          />
-          <Conversor.InputNumber
-            name='s'
-            value={hsv.s}
-            max={100}
-            type={colorCode.HSV}
-            dispatch={dispatch}
-          />
-          <Conversor.InputNumber
-            name='v'
-            value={hsv.v}
-            max={100}
-            type={colorCode.HSV}
-            dispatch={dispatch}
-          />
-        </Conversor.Group>
-        <Conversor.Group
-          type={colorCode.HSL}
-          title={colorCode.HSL + ' (H,S,L)'}
-        >
-          <Conversor.InputNumber
-            name='h'
-            value={hsl.h}
-            max={360}
-            type={colorCode.HSL}
-            dispatch={dispatch}
-          />
-          <Conversor.InputNumber
-            name='s'
-            value={hsl.s}
-            max={100}
-            type={colorCode.HSL}
-            dispatch={dispatch}
-          />
-          <Conversor.InputNumber
-            name='l'
-            value={hsl.l}
-            max={100}
-            type={colorCode.HSL}
-            dispatch={dispatch}
-          />
-        </Conversor.Group>
-        <div className='mb-4'>
-          <p className='m-2 font-bold'>Color preview:</p>
-          <div
-            style={{ backgroundColor: `#${state.HEX}` }}
-            className='w-full h-32 rounded-lg'
-          ></div>
-        </div>
-
-        <div className='text-right'>
-          <button
-            className='relative inline-flex items-center justify-center p-0.5 my-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 focus:ring-4 focus:outline-none focus:ring-purple-200 '
-            onClick={e => {
-              e.preventDefault()
-              dispatch({ type: colorCode.RESET })
-            }}
           >
-            <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-90 group-focus:bg-opacity-90'>
-              Reset
-            </span>
-          </button>
-        </div>
-      </Conversor>
-
-      <AccordionItem
-        title={'RGB to HEX / HEX to RGB'}
-        toggle={toggleAccordion}
-        selected={selected}
-      >
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>HEX color</p>
-          <p>Hex color code is a 6 digits hexadecimal (base 16) number:</p>
-          <p className='italic m-2'>
-            RRGGBB<sub>16</sub>
-          </p>
-          <p>The 2 left digits represent the red color.</p>
-          <p>The 2 middle digits represent the green color.</p>
-          <p>The 2 right digits represent the blue color.</p>
-        </div>
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>RGB color</p>
-          <p>
-            The RGB color is a combination of <strong>R</strong>ed,{' '}
-            <strong>G</strong>reen and <strong>B</strong>lue colors:
-          </p>
-          <p className='italic m-2'>(R, G, B)</p>
-          <p>
-            The red, green and blue use 8 bits each, which have integer values
-            from 0 to 255. So the number of colors that can be generated is:
-          </p>
-          <p className='italic m-2'>
-            256×256×256 = 16777216 = 1000000<sub>16</sub>
-          </p>
-        </div>
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>Hex to RGB conversion</p>
-          <ul className='space-y-1 list-disc list-inside mb-8'>
-            <li>
-              Get the 2 left digits of the hex color code and convert to decimal
-              value to get the red color level.
-            </li>
-            <li>
-              Get the 2 middle digits of the hex color code and convert to
-              decimal value to get the green color level.
-            </li>
-            <li>
-              Get the 2 right digits of the hex color code and convert to
-              decimal value to get the blue color level.
-            </li>
-          </ul>
-        </div>
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>RGB to HEX conversion</p>
-          <ul className='space-y-1 list-disc list-inside mb-8'>
-            <li>
-              Convert the red, green and blue color values from decimal to
-              hexadecimal.
-            </li>
-            <li>
-              Concatenate the hex values of the red, green and blue together.
-            </li>
-          </ul>
-        </div>
-      </AccordionItem>
-      <AccordionItem
-        title={'RGB to HSV / HSV to RGB'}
-        toggle={toggleAccordion}
-        selected={selected}
-      >
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>RGB to HSV formula:</p>
-          <p>
-            The R,G,B values are divided by 255 to change the range from [0,255]
-            to [0,1]
-          </p>
-          <p className='italic m-2'>R' = R/255</p>
-          <p className='italic m-2'>G`= G/255</p>
-          <p className='italic m-2'>B`= B/255</p>
-          <p className='italic m-2'>Cmax = max(R', G', B')</p>
-          <p className='italic m-2'>Cmin = min(R', G', B')</p>
-          <p className='italic m-2'>Δ = Cmax - Cmin</p>
-          <p>Hue calculation:</p>
-          <p className='italic m-2'>if Δ = 0 {'=>'} H = 0</p>
-          <p className='italic m-2'>
-            if Cmax = R' {'=>'} H = 60º x (G' - B')/Δ
-          </p>
-          <p className='italic m-2'>
-            if Cmax = G' {'=>'} H = 2 + 60º x (B' - R')/Δ
-          </p>
-          <p className='italic m-2'>
-            if Cmax = B' {'=>'} H = 4 + 60º x (R' - B')/Δ
-          </p>
-          <p>Saturation calculation:</p>
-          <p className='italic m-2'>if Cmax = 0 {'=>'} S = 0</p>
-          <p className='italic m-2'>if Cmax &#8800; 0 {'=>'} S = Δ/Cmax</p>
-          <p>Value calculation:</p> <p className='italic'>V = Cmax</p>
-        </div>
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>HSV to RGB formula:</p>
-          <p>HSV values are on [0,360], [0,1] and [0,1] ranges respectively.</p>
-          <p className='italic m-2'>C = V × S</p>
-          <p className='italic m-2'>X = C × (1 - |(H / 60°) mod 2 - 1|)</p>
-          <p className='italic m-2'>m = V - C</p>
-          <p className='italic m-2'>
-            0º &#8924; H {'<'} 60º {'=>'} (R', G', B') = (C, X, 0){' '}
-          </p>
-          <p className='italic m-2'>
-            60º &#8924; H {'<'} 120º {'=>'} (R', G', B') = (X, C, 0){' '}
-          </p>
-          <p className='italic m-2'>
-            120º &#8924; H {'<'} 180º {'=>'} (R', G', B') = (0, C, X){' '}
-          </p>
-          <p className='italic m-2'>
-            180º &#8924; H {'<'} 240º {'=>'} (R', G', B') = (0, X, C){' '}
-          </p>
-          <p className='italic m-2'>
-            240º &#8924; H {'<'} 300º {'=>'} (R', G', B') = (X, 0, C){' '}
-          </p>
-          <p className='italic m-2'>
-            300º &#8924; H {'<'} 360º {'=>'} (R', G', B') = (C, 0, X){' '}
-          </p>
-          <p className='italic m-2'>
-            (R,G,B) = ((R'+m)×255, (G'+m)×255, (B'+m)×255)
-          </p>
-        </div>
-      </AccordionItem>
-      <AccordionItem
-        title={'RGB to HSL / HSL to RGB'}
-        toggle={toggleAccordion}
-        selected={selected}
-      >
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>RGB to HSL formula:</p>
-          <p>
-            The R,G,B values are divided by 255 to change the range from [0,255]
-            to [0,1]
-          </p>
-          <p className='italic m-2'>R' = R/255</p>
-          <p className='italic m-2'>G`= G/255</p>
-          <p className='italic m-2'>B`= B/255</p>
-          <p className='italic m-2'>Cmax = max(R', G', B')</p>
-          <p className='italic m-2'>Cmin = min(R', G', B')</p>
-          <p className='italic m-2'>Δ = Cmax - Cmin</p>
-          <p>Hue calculation:</p>
-          <p className='italic m-2'>if Δ = 0 {'=>'} H = 0</p>
-          <p className='italic m-2'>
-            if Cmax = R' {'=>'} H = 60º x (G' - B')/Δ
-          </p>
-          <p className='italic m-2'>
-            if Cmax = G' {'=>'} H = 2 + 60º x (B' - R')/Δ
-          </p>
-          <p className='italic m-2'>
-            if Cmax = B' {'=>'} H = 4 + 60º x (R' - B')/Δ
-          </p>
-          <p>Saturation calculation:</p>
-          <p className='italic mb-2'>if Δ = 0 {'=>'} S = 0</p>
-          <p className='italic mb-2'>
-            if Δ {'<>'} 0 {'=>'} S = Δ / (1 - 2L -1|){' '}
-          </p>
-          <p>Lightness calculation:</p>
-          <p className='italic mb-2'>L = (Cmax + Cmin) / 2</p>
-          <div className='mb-4'>
-            <p className='font-bold mb-2'>HSL to RGB formula:</p>
-            <p>
-              HSL values are on [0,360], [0,1] and [0,1] ranges respectively.
-            </p>
-            <p className='italic m-2'>C = (1 - |2L - 1|) × S</p>
-            <p className='italic m-2'>X = C × (1 - |(H / 60°) mod 2 - 1|)</p>
-            <p className='italic m-2'>m = L - C/2</p>
-            <p className='italic m-2'>
-              0º &#8924; H {'<'} 60º {'=>'} (R', G', B') = (C, X, 0){' '}
-            </p>
-            <p className='italic m-2'>
-              60º &#8924; H {'<'} 120º {'=>'} (R', G', B') = (X, C, 0){' '}
-            </p>
-            <p className='italic m-2'>
-              120º &#8924; H {'<'} 180º {'=>'} (R', G', B') = (0, C, X){' '}
-            </p>
-            <p className='italic m-2'>
-              180º &#8924; H {'<'} 240º {'=>'} (R', G', B') = (0, X, C){' '}
-            </p>
-            <p className='italic m-2'>
-              240º &#8924; H {'<'} 300º {'=>'} (R', G', B') = (X, 0, C){' '}
-            </p>
-            <p className='italic m-2'>
-              300º &#8924; H {'<'} 360º {'=>'} (R', G', B') = (C, 0, X){' '}
-            </p>
-            <p className='italic m-2'>
-              (R,G,B) = ((R'+m)×255, (G'+m)×255, (B'+m)×255)
-            </p>
+            <Conversor.InputNumber
+              name='r'
+              value={rgb.r}
+              max={255}
+              type={colorCode.RGB}
+              dispatch={dispatch}
+            />
+            <Conversor.InputNumber
+              name='g'
+              value={rgb.g}
+              max={255}
+              type={colorCode.RGB}
+              dispatch={dispatch}
+            />
+            <Conversor.InputNumber
+              name='b'
+              value={rgb.b}
+              max={255}
+              type={colorCode.RGB}
+              dispatch={dispatch}
+            />
+          </Conversor.Group>
+          <Conversor.Group
+            title={colorCode.HSV + ' (H,S,V)'}
+            type={colorCode.HSV}
+          >
+            <Conversor.InputNumber
+              name='h'
+              value={hsv.h}
+              max={360}
+              type={colorCode.HSV}
+              dispatch={dispatch}
+            />
+            <Conversor.InputNumber
+              name='s'
+              value={hsv.s}
+              max={100}
+              type={colorCode.HSV}
+              dispatch={dispatch}
+            />
+            <Conversor.InputNumber
+              name='v'
+              value={hsv.v}
+              max={100}
+              type={colorCode.HSV}
+              dispatch={dispatch}
+            />
+          </Conversor.Group>
+          <Conversor.Group
+            type={colorCode.HSL}
+            title={colorCode.HSL + ' (H,S,L)'}
+          >
+            <Conversor.InputNumber
+              name='h'
+              value={hsl.h}
+              max={360}
+              type={colorCode.HSL}
+              dispatch={dispatch}
+            />
+            <Conversor.InputNumber
+              name='s'
+              value={hsl.s}
+              max={100}
+              type={colorCode.HSL}
+              dispatch={dispatch}
+            />
+            <Conversor.InputNumber
+              name='l'
+              value={hsl.l}
+              max={100}
+              type={colorCode.HSL}
+              dispatch={dispatch}
+            />
+          </Conversor.Group>
+          <div className='acc-container'>
+            <p className='m-2 font-bold'>Color preview:</p>
+            <div
+              style={{ backgroundColor: `#${state.HEX}` }}
+              className='w-full h-32 rounded-lg'
+            ></div>
           </div>
-        </div>
-      </AccordionItem>
-      <AccordionItem
-        title={'HEX to HSV / HSV to HEX'}
-        toggle={toggleAccordion}
-        selected={selected}
-      >
-        <div className='mb-4'>
-          The easiest and more straighforward method is to transform the HEX/HSV
-          values to RGB as a proxy and back to the desired code color
-        </div>
-      </AccordionItem>
 
-      <AccordionItem
-        title={'HEX to HSL / HSL to HEX'}
-        toggle={toggleAccordion}
-        selected={selected}
-      >
-        <div className='mb-4'>
-          The easiest and more straighforward method is to transform the HEX/HSL
-          values to RGB as a proxy and back to the desired code color
-        </div>
-      </AccordionItem>
+          <div className='text-right'>
+            <button
+              className='relative inline-flex items-center justify-center p-0.5 my-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 focus:ring-4 focus:outline-none focus:ring-purple-200 '
+              onClick={e => {
+                e.preventDefault()
+                dispatch({ type: colorCode.RESET })
+              }}
+            >
+              <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-90 group-focus:bg-opacity-90'>
+                Reset
+              </span>
+            </button>
+          </div>
+        </Conversor>
+      </div>
+      <div className='mt-4'>
+        <h3 className='bold text-2xl mb-4'>How to: </h3>
+        <AccordionItem
+          title={'RGB to HEX / HEX to RGB'}
+          toggle={toggleAccordion}
+          selected={selected}
+        >
+          <div className='acc-container'>
+            <p className='acc-accent'>HEX color</p>
+            <p>Hex color code is a 6 digits hexadecimal (base 16) number:</p>
+            <p className='acc-italic'>
+              RRGGBB<sub>16</sub>
+            </p>
+            <p>The 2 left digits represent the red color.</p>
+            <p>The 2 middle digits represent the green color.</p>
+            <p>The 2 right digits represent the blue color.</p>
+          </div>
+          <div className='acc-container'>
+            <p className='acc-accent'>RGB color</p>
+            <p>
+              The RGB color is a combination of <strong>R</strong>ed,{' '}
+              <strong>G</strong>reen and <strong>B</strong>lue colors:
+            </p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>(R, G, B)</p>
+            </div>
+            <p>
+              The red, green and blue use 8 bits each, which have integer values
+              from 0 to 255. So the number of colors that can be generated is:
+            </p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>
+                256×256×256 = 16777216 = 1000000<sub>16</sub>
+              </p>
+            </div>
+          </div>
+          <div className='acc-container'>
+            <p className='acc-accent'>Hex to RGB conversion</p>
+            <ul className='space-y-1 list-disc list-inside mb-8'>
+              <li>
+                Get the 2 left digits of the hex color code and convert to
+                decimal value to get the red color level.
+              </li>
+              <li>
+                Get the 2 middle digits of the hex color code and convert to
+                decimal value to get the green color level.
+              </li>
+              <li>
+                Get the 2 right digits of the hex color code and convert to
+                decimal value to get the blue color level.
+              </li>
+            </ul>
+          </div>
+          <div className='acc-container'>
+            <p className='acc-accent'>RGB to HEX conversion</p>
+            <ul className='space-y-1 list-disc list-inside mb-8'>
+              <li>
+                Convert the red, green and blue color values from decimal to
+                hexadecimal.
+              </li>
+              <li>
+                Concatenate the hex values of the red, green and blue together.
+              </li>
+            </ul>
+          </div>
+        </AccordionItem>
+        <AccordionItem
+          title={'RGB to HSV / HSV to RGB'}
+          toggle={toggleAccordion}
+          selected={selected}
+        >
+          <div className='acc-container'>
+            <p className='acc-accent'>RGB to HSV formula:</p>
+            <p>
+              The R,G,B values are divided by 255 to change the range from
+              [0,255] to [0,1]
+            </p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>R' = R/255</p>
+              <p className='acc-italic'>G`= G/255</p>
+              <p className='acc-italic'>B`= B/255</p>
+              <p className='acc-italic'>Cmax = max(R', G', B')</p>
+              <p className='acc-italic'>Cmin = min(R', G', B')</p>
+              <p className='acc-italic'>Δ = Cmax - Cmin</p>
+            </div>
+            <p>Hue calculation:</p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>if Δ = 0 {'=>'} H = 0</p>
+              <p className='acc-italic'>
+                if Cmax = R' {'=>'} H = 60º x (G' - B')/Δ
+              </p>
+              <p className='acc-italic'>
+                if Cmax = G' {'=>'} H = 2 + 60º x (B' - R')/Δ
+              </p>
+              <p className='acc-italic'>
+                if Cmax = B' {'=>'} H = 4 + 60º x (R' - B')/Δ
+              </p>
+            </div>
+            <p>Saturation calculation:</p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>if Cmax = 0 {'=>'} S = 0</p>
+              <p className='acc-italic'>if Cmax &#8800; 0 {'=>'} S = Δ/Cmax</p>
+              <p>Value calculation:</p> <p className='italic'>V = Cmax</p>
+            </div>
+          </div>
+          <div className='acc-container'>
+            <p className='acc-accent'>HSV to RGB formula:</p>
+            <p>
+              HSV values are on [0,360], [0,1] and [0,1] ranges respectively.
+            </p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>C = V × S</p>
+              <p className='acc-italic'>X = C × (1 - |(H / 60°) mod 2 - 1|)</p>
+              <p className='acc-italic'>m = V - C</p>
+              <p className='acc-italic'>
+                0º &#8924; H {'<'} 60º {'=>'} (R', G', B') = (C, X, 0){' '}
+              </p>
+              <p className='acc-italic'>
+                60º &#8924; H {'<'} 120º {'=>'} (R', G', B') = (X, C, 0){' '}
+              </p>
+              <p className='acc-italic'>
+                120º &#8924; H {'<'} 180º {'=>'} (R', G', B') = (0, C, X){' '}
+              </p>
+              <p className='acc-italic'>
+                180º &#8924; H {'<'} 240º {'=>'} (R', G', B') = (0, X, C){' '}
+              </p>
+              <p className='acc-italic'>
+                240º &#8924; H {'<'} 300º {'=>'} (R', G', B') = (X, 0, C){' '}
+              </p>
+              <p className='acc-italic'>
+                300º &#8924; H {'<'} 360º {'=>'} (R', G', B') = (C, 0, X){' '}
+              </p>
+              <p className='acc-italic'>
+                (R,G,B) = ((R'+m)×255, (G'+m)×255, (B'+m)×255)
+              </p>
+            </div>
+          </div>
+        </AccordionItem>
+        <AccordionItem
+          title={'RGB to HSL / HSL to RGB'}
+          toggle={toggleAccordion}
+          selected={selected}
+        >
+          <div className='acc-container'>
+            <p className='acc-accent'>RGB to HSL formula:</p>
+            <p>
+              The R,G,B values are divided by 255 to change the range from
+              [0,255] to [0,1]
+            </p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>R' = R/255</p>
+              <p className='acc-italic'>G`= G/255</p>
+              <p className='acc-italic'>B`= B/255</p>
+              <p className='acc-italic'>Cmax = max(R', G', B')</p>
+              <p className='acc-italic'>Cmin = min(R', G', B')</p>
+              <p className='acc-italic'>Δ = Cmax - Cmin</p>
+            </div>
+            <p>Hue calculation:</p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>if Δ = 0 {'=>'} H = 0</p>
+              <p className='acc-italic'>
+                if Cmax = R' {'=>'} H = 60º x (G' - B')/Δ
+              </p>
+              <p className='acc-italic'>
+                if Cmax = G' {'=>'} H = 2 + 60º x (B' - R')/Δ
+              </p>
+              <p className='acc-italic'>
+                if Cmax = B' {'=>'} H = 4 + 60º x (R' - B')/Δ
+              </p>
+            </div>
+            <p>Saturation calculation:</p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>if Δ = 0 {'=>'} S = 0</p>
+              <p className='acc-italic'>
+                if Δ {'<>'} 0 {'=>'} S = Δ / (1 - 2L -1|){' '}
+              </p>
+            </div>
 
-      <AccordionItem
-        title={'HSV to HSL / HSL to HSV'}
-        toggle={toggleAccordion}
-        selected={selected}
-      >
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>HSV to HSL formula:</p>
-          <p>
-            HSV values are on H = [0,360], S = [0,1] and V = [0,1] ranges
-            respectively.
-          </p>
-          <p className='italic mb-2'>
-            H<sub>HSL</sub> = H<sub>HSV</sub>
-          </p>
-          <p className='italic mb-2'>L = ((2 - S) * V) / 2</p>
-          <p className='italic mb-2'>
-            if L = 0 {'=>'} S<sub>HSL</sub> = S<sub>HSV</sub>
-          </p>
-          <p className='italic mb-2'>
-            if L = 1 {'=>'} S<sub>HSL</sub> = 0
-          </p>
-          <p className='italic mb-2'>
-            if 0 ⋜ L {'<'} 0.5 {'=>'} S<sub>HSL</sub> = (SS<sub>HSV</sub> * V) /
-            (L * 2)
-          </p>
-          <p className='italic mb-2'>
-            if 0.5 ⋜ L {'<'} 1 {'=>'} S<sub>HSL</sub> = (SS<sub>HSV</sub> * V) /
-            (2 - L * 2)
-          </p>
-        </div>
-        <div className='mb-4'>
-          <p className='font-bold mb-2'>HSL to HSV formula:</p>
-          <p>
-            HSL values are on H = [0,360], S = [0,1] and L = [0,1] ranges
-            respectively.
-          </p>
-          <p className='italic mb-2'>
-            H<sub>HSV</sub> = H<sub>HSL</sub>
-          </p>
-          <p className='italic mb-2'>
-            V = L + S<sub>HSL</sub> x Min(L, 1 - L)<sub>HSL</sub>
-          </p>
-          <p className='italic mb-2'>
-            if V = 0 {'=>'} S<sub>HSV</sub> = 0
-          </p>
-          <p className='italic mb-2'>
-            if V ≠ 0 {'=>'} S<sub>HSV</sub> = 2 -2L/V
-          </p>
-        </div>
-      </AccordionItem>
+            <p>Lightness calculation:</p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>L = (Cmax + Cmin) / 2</p>
+            </div>
+
+            <div className='acc-container'>
+              <p className='acc-accent'>HSL to RGB formula:</p>
+              <p>
+                HSL values are on [0,360], [0,1] and [0,1] ranges respectively.
+              </p>
+              <div className='acc-quote'>
+                <p className='acc-italic'>C = (1 - |2L - 1|) × S</p>
+                <p className='acc-italic'>
+                  X = C × (1 - |(H / 60°) mod 2 - 1|)
+                </p>
+                <p className='acc-italic'>m = L - C/2</p>
+                <p className='acc-italic'>
+                  0º &#8924; H {'<'} 60º {'=>'} (R', G', B') = (C, X, 0){' '}
+                </p>
+                <p className='acc-italic'>
+                  60º &#8924; H {'<'} 120º {'=>'} (R', G', B') = (X, C, 0){' '}
+                </p>
+                <p className='acc-italic'>
+                  120º &#8924; H {'<'} 180º {'=>'} (R', G', B') = (0, C, X){' '}
+                </p>
+                <p className='acc-italic'>
+                  180º &#8924; H {'<'} 240º {'=>'} (R', G', B') = (0, X, C){' '}
+                </p>
+                <p className='acc-italic'>
+                  240º &#8924; H {'<'} 300º {'=>'} (R', G', B') = (X, 0, C){' '}
+                </p>
+                <p className='acc-italic'>
+                  300º &#8924; H {'<'} 360º {'=>'} (R', G', B') = (C, 0, X){' '}
+                </p>
+                <p className='acc-italic'>
+                  (R,G,B) = ((R'+m)×255, (G'+m)×255, (B'+m)×255)
+                </p>
+              </div>
+            </div>
+          </div>
+        </AccordionItem>
+        <AccordionItem
+          title={'HEX to HSV / HSV to HEX'}
+          toggle={toggleAccordion}
+          selected={selected}
+        >
+          <div className='acc-container'>
+            The easiest and more straighforward method is to transform the
+            HEX/HSV values to RGB as a proxy and back to the desired code color
+          </div>
+        </AccordionItem>
+
+        <AccordionItem
+          title={'HEX to HSL / HSL to HEX'}
+          toggle={toggleAccordion}
+          selected={selected}
+        >
+          <div className='acc-container'>
+            The easiest and more straighforward method is to transform the
+            HEX/HSL values to RGB as a proxy and back to the desired code color
+          </div>
+        </AccordionItem>
+
+        <AccordionItem
+          title={'HSV to HSL / HSL to HSV'}
+          toggle={toggleAccordion}
+          selected={selected}
+        >
+          <div className='acc-container'>
+            <p className='acc-accent'>HSV to HSL formula:</p>
+            <p>
+              HSV values are on H = [0,360], S = [0,1] and V = [0,1] ranges
+              respectively.
+            </p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>
+                H<sub>HSL</sub> = H<sub>HSV</sub>
+              </p>
+              <p className='acc-italic'>L = ((2 - S) * V) / 2</p>
+              <p className='acc-italic'>
+                if L = 0 {'=>'} S<sub>HSL</sub> = S<sub>HSV</sub>
+              </p>
+              <p className='acc-italic'>
+                if L = 1 {'=>'} S<sub>HSL</sub> = 0
+              </p>
+              <p className='acc-italic'>
+                if 0 ⋜ L {'<'} 0.5 {'=>'} S<sub>HSL</sub> = (SS<sub>HSV</sub> *
+                V) / (L * 2)
+              </p>
+              <p className='acc-italic'>
+                if 0.5 ⋜ L {'<'} 1 {'=>'} S<sub>HSL</sub> = (SS<sub>HSV</sub> *
+                V) / (2 - L * 2)
+              </p>
+            </div>
+          </div>
+          <div className='acc-container'>
+            <p className='acc-accent'>HSL to HSV formula:</p>
+            <p>
+              HSL values are on H = [0,360], S = [0,1] and L = [0,1] ranges
+              respectively.
+            </p>
+            <div className='acc-quote'>
+              <p className='acc-italic'>
+                H<sub>HSV</sub> = H<sub>HSL</sub>
+              </p>
+              <p className='acc-italic'>
+                V = L + S<sub>HSL</sub> x Min(L, 1 - L)<sub>HSL</sub>
+              </p>
+              <p className='acc-italic'>
+                if V = 0 {'=>'} S<sub>HSV</sub> = 0
+              </p>
+              <p className='acc-italic'>
+                if V ≠ 0 {'=>'} S<sub>HSV</sub> = 2 -2L/V
+              </p>
+            </div>
+          </div>
+        </AccordionItem>
+      </div>
     </div>
   )
 }

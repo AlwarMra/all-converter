@@ -2,6 +2,7 @@ import React from 'react'
 import Group from './Group'
 import InputNumber from './InputNumber'
 import InputText from './InputText'
+import Textarea from './Textarea'
 
 interface Children {
   children?: React.ReactNode
@@ -17,5 +18,6 @@ const Conversor = ({ children }: Children) => {
 Conversor.Group = Group
 Conversor.InputText = InputText
 Conversor.InputNumber = InputNumber
+Conversor.Textarea = Textarea
 
 export default Conversor

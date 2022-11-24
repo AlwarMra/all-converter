@@ -17,10 +17,14 @@ const Accordion: React.FC<AccordionComponent> = ({
     <>
       <div>
         <div
-          className='cursor-pointer border rounded-md p-2'
+          className='cursor-pointer border rounded-md p-2 flex justify-between items-center'
           onClick={() => toggle(title)}
         >
           <h2 className=''>{title}</h2>
+          <span
+            data-accordion={selected === title ? 'open' : 'close'}
+            className='text-5xl leading-[0] relative right-4 before:content-[""] before:w-4 before:h-1 before:absolute before:rotate-90 before:bg-black before:transition-transform before:duration-300 after:content-[""] after:w-4 after:h-1 after:absolute after:bg-black accordion:before:rotate-0 '
+          />
         </div>
         <div
           data-accordion={selected === title ? 'open' : 'close'}

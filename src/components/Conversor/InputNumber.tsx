@@ -1,7 +1,7 @@
 interface InputNumber {
   name: string
   value: number
-  max: number
+  max?: number
   type: string
   dispatch: any
 }
@@ -13,7 +13,8 @@ const InputNumber: React.FC<InputNumber> = ({
   type,
   dispatch,
 }) => {
-  const maxLength = max.toString().length
+  let maxLength
+  if (max) maxLength = max.toString().length
 
   return (
     <input

@@ -15,9 +15,12 @@
 .acc-accent {
   @apply font-bold mb-2;
 }
-.acc-blockquote {
-  @apply italic m-2;
-}
 .acc-container {
   @apply mb-4;
+}
+.acc-italic {
+  @apply italic m-2;
+}
+.acc-quote {
+  @apply bg-slate-100 py-1 my-2;
 }
