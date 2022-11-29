@@ -9,7 +9,7 @@ interface Children {
 }
 const Conversor = ({ children }: Children) => {
   return (
-    <form className='max-w-xl p-2 rounded-md border border-gray-300 bg-white mb-12'>
+    <form className='max-w-xl p-2 rounded-md border border-fuchsia-200 bg-white mb-12 bg-gradient-to-br from-fuchsia-50 via-indigo-50 to-sky-100'>
       {children}
     </form>
   )

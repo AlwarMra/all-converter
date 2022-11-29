@@ -132,8 +132,6 @@ function checkValue(val: string, min: number, max: number) {
 }
 const Colors: React.FC = () => {
   const [state, dispatch] = useReducer(colorReducer, initialColorState)
-  // const { selected, toggleAccordion } = useContext(Accordion)
-
   const { selected, toggleAccordion } = useAccordion()
 
   const rgb = state.RGB
@@ -142,7 +140,7 @@ const Colors: React.FC = () => {
   const hex = state.HEX
 
   return (
-    <div className='max-w-5xl p-4 my-4 grid gap-4 mx-auto grid-cols-1 md:grid-cols-3'>
+    <div className='p-4 grid gap-4 mx-auto grid-cols-1 md:grid-cols-3'>
       <div className='col-span-2'>
         <Title>
           <>Color conversion</>

@@ -33,7 +33,7 @@ const BinaryText = () => {
   }
 
   return (
-    <div className='max-w-5xl m-4'>
+    <>
       <Title>
         <>Binary / Text conversion</>
       </Title>
@@ -65,7 +65,7 @@ const BinaryText = () => {
         </Conversor.Group>
       </Conversor>
       <button onClick={() => switchTextarea()}>Switch</button>
-    </div>
+    </>
   )
 }
 

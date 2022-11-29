@@ -10,7 +10,25 @@
     -moz-appearance: textfield;
   }
 }
-
+/*Colors*/
+.primary-color-s {
+  @apply bg-sky-50;
+}
+.primary-color-m {
+  @apply bg-sky-200;
+}
+.primary-color-l {
+  @apply bg-sky-300;
+}
+.primary-color-xl {
+  @apply bg-sky-400;
+}
+.secondary-color {
+  @apply bg-sky-300;
+}
+.neutral {
+  @apply bg-sky-50;
+}
 /* Accordion */
 .acc-accent {
   @apply font-bold mb-2;
@@ -22,5 +40,5 @@
   @apply italic m-2;
 }
 .acc-quote {
-  @apply bg-slate-100 py-1 my-2;
+  @apply bg-sky-100 border border-sky-200 py-1 my-2;
 }

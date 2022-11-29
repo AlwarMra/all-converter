@@ -22,7 +22,7 @@ const Textarea: React.FC<Props> = ({
 
   return (
     <textarea
-      className='w-full p-4 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-0'
+      className='w-full p-4 text-sm text-gray-900 primary- border border-sky-200 rounded-lg focus:ring-0'
       placeholder={`${title} input...`}
       name={title}
       id={title}
