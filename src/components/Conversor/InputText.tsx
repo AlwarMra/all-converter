@@ -15,7 +15,7 @@ const InputText: React.FC<InputText> = ({
 }) => {
   return (
     <input
-      className='bg-sky-50 border border-sky-200 text-gray-900 text-sm rounded-lg focus:ring-sky-400 focus:border-sky-400 block w-full p-2.5'
+      className='border border-sky-200 text-gray-900 text-sm rounded-lg focus:ring-sky-400 focus:border-sky-400 block w-full p-2.5'
       type='text'
       name={name}
       id={name}

@@ -13,13 +13,6 @@ const Textarea: React.FC<Props> = ({
   value = '',
   getValue,
 }) => {
-  // const [v, setV] = useState(value)
-
-  // function handleOnChange(str: string) {
-  //   getValue!(str)
-  //   setV(str)
-  // }
-
   return (
     <textarea
       className='w-full p-4 text-sm text-gray-900 primary- border border-sky-200 rounded-lg focus:ring-0'
@@ -33,7 +26,6 @@ const Textarea: React.FC<Props> = ({
       onChange={
         getValue
           ? e => {
-              // handleOnChange(e.target.value)
               getValue(e.target.value)
             }
           : undefined

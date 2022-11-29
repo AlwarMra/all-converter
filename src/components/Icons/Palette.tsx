@@ -1,13 +1,13 @@
 import React from 'react'
 import LinearGradient from './LinearGradient'
 
-const Palette = () => {
+const Palette = ({ w = 40, h = 40 }) => {
   const name = 'SVG__Palette'
   return (
     <svg
       style={{ fill: `url(#${name})` }}
-      width='512px'
-      height='512px'
+      width={w}
+      height={h}
       viewBox='0 0 512 512'
       xmlns='http://www.w3.org/2000/svg'
     >
