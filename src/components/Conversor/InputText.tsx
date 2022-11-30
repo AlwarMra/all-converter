@@ -1,7 +1,7 @@
 interface InputText {
   name: string
   value: string
-  max: number
+  max?: number
   type: string
   dispatch: any
 }
@@ -13,6 +13,8 @@ const InputText: React.FC<InputText> = ({
   max,
   dispatch,
 }) => {
+  let maxLength
+  if (max) maxLength = max.toString().length
   return (
     <input
       className='border border-sky-200 text-gray-900 text-sm rounded-lg focus:ring-sky-400 focus:border-sky-400 block w-full p-2.5'
@@ -20,7 +22,7 @@ const InputText: React.FC<InputText> = ({
       name={name}
       id={name}
       value={value}
-      maxLength={max}
+      maxLength={maxLength}
       onChange={e =>
         dispatch({
           type: type,

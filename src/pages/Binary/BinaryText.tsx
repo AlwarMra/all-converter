@@ -15,8 +15,9 @@ const BinaryText = () => {
   const [text, setText] = useState('')
 
   const binaryToTextHandler = (value: string) => {
-    setBinary(value)
-    setResult(binaryToText(value))
+    const b = value.replace(/[^\s*0-1]/g, '')
+    setBinary(b)
+    setResult(binaryToText(b))
   }
 
   const textToBinaryHandler = (value: string) => {

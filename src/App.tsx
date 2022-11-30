@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Colors from './pages/Colors/Colors'
 import BinaryText from './pages/Binary/BinaryText'
+import BinaryNumbers from './pages/Binary/BinaryNumbers'
 
 //Components
 import Header from './components/Header'
@@ -19,6 +20,7 @@ function App(): JSX.Element {
             <Route path='/' element={<Home />} />
             <Route path='/convert/colors' element={<Colors />} />
             <Route path='/convert/binary-text' element={<BinaryText />} />
+            <Route path='/convert/binary-number' element={<BinaryNumbers />} />
           </Routes>
         </div>
       </div>
