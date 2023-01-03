@@ -3,6 +3,7 @@ interface InputNumber {
   value: number
   max?: number
   type: string
+  disabled?: boolean
   dispatch: any
 }
 
@@ -11,6 +12,7 @@ const InputNumber: React.FC<InputNumber> = ({
   value,
   max,
   type,
+  disabled = false,
   dispatch,
 }) => {
   let maxLength
@@ -28,6 +30,7 @@ const InputNumber: React.FC<InputNumber> = ({
       value={value.toString()}
       min={0}
       max={max}
+      disabled={disabled}
       data-type={type}
       maxLength={maxLength}
       onChange={e =>

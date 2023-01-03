@@ -35,7 +35,6 @@ function HSLToHex(hsl: Array<number>) {
 
 function HSLToHSV(hsl: Array<number>) {
   const hslCopy = [...hsl]
-  console.log(hslCopy)
   let h = hslCopy[0]
   let s = hslCopy[1] / 100
   let l = hslCopy[2] / 100

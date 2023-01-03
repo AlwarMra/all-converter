@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import AccordionItem from '../components/AccordionItem'
-import { PaletteIcon, BinaryIcon, ArrowRightIcon } from '../components/Icons'
+import {
+  PaletteIcon,
+  BinaryIcon,
+  ArrowRightIcon,
+  RulerIcon,
+} from '../components/Icons'
 import Title from '../components/Title'
 import useAccordion from '../hooks/useAccordion'
 
@@ -34,6 +39,9 @@ const Home = () => {
             <ArrowRightIcon w={25} h={25} /> Binary / number
           </Link>
         </AccordionItem>
+        <Link to='convert/lengths' className={MenuLinkClasses}>
+          <RulerIcon /> <span className='text-xl'>Lengths</span>
+        </Link>
       </div>
     </div>
   )

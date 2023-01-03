@@ -52,7 +52,7 @@ const Accordion: React.FC<AccordionComponent> = ({
         </div>
         <div
           data-accordion={selected === title ? 'open' : 'close'}
-          className='pl-4 mt-4 overflow-hidden max-h-0 transition-all duration-600 accordion:h-auto accordion:max-h-[3000px] '
+          className='pl-4 mt-4 overflow-hidden max-h-0 transition-all duration-600 delay-300 accordion:h-auto accordion:max-h-[3000px]'
         >
           {children}
         </div>

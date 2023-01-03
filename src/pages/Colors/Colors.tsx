@@ -7,6 +7,7 @@ import { HSLToHex, HSLToHSV, HSLtoRGB } from '../../utils/colors/hslToAll'
 import { HSVToHEX, HSVToHSL, HSVToRGB } from '../../utils/colors/hsvToAll'
 import { HEXToHSL, HEXToHSV, HEXToRGB } from '../../utils/colors/hexToAll'
 import Title from '../../components/Title'
+import { checkValue } from '../../utils/utils'
 
 enum colorCode {
   RGB = 'RGB',
@@ -121,15 +122,6 @@ function managePayload(state: any, payload: payload) {
   return obj
 }
 
-function checkValue(val: string, min: number, max: number) {
-  if (Number(val) < min) {
-    return 0
-  } else if (Number(val) > max) {
-    return max
-  } else {
-    return Number(val)
-  }
-}
 const Colors: React.FC = () => {
   const [state, dispatch] = useReducer(colorReducer, initialColorState)
   const { selected, toggleAccordion } = useAccordion()

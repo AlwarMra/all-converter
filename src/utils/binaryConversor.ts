@@ -21,7 +21,6 @@ function binaryToOctal(str: string) {
   return parseInt(str, 2).toString(8)
 }
 function binaryToHex(str: string) {
-  console.log
   return parseInt(str, 2).toString(16).toUpperCase()
 }
 function octalToDecimal(str: string) {

@@ -3,6 +3,7 @@ import Group from './Group'
 import InputNumber from './InputNumber'
 import InputText from './InputText'
 import Textarea from './Textarea'
+import Select from './Select'
 
 interface Children {
   children?: React.ReactNode
@@ -19,5 +20,6 @@ Conversor.Group = Group
 Conversor.InputText = InputText
 Conversor.InputNumber = InputNumber
 Conversor.Textarea = Textarea
+Conversor.Select = Select
 
 export default Conversor

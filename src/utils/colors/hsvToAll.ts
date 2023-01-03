@@ -4,7 +4,6 @@ import { RGBToHex } from './rgbToAll'
 
 function HSVToRGB(hsv: Array<number>) {
   const hsvCopy = [...hsv]
-  console.log(hsv)
   let h = hsvCopy[0]
   let s = (hsvCopy[1] /= 100)
   let v = (hsvCopy[2] /= 100)

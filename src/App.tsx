@@ -6,7 +6,7 @@ import Home from './pages/Home'
 import Colors from './pages/Colors/Colors'
 import BinaryText from './pages/Binary/BinaryText'
 import BinaryNumbers from './pages/Binary/BinaryNumbers'
-
+import Lengths from './pages/Lengths/Lengths'
 //Components
 import Header from './components/Header'
 
@@ -21,6 +21,7 @@ function App(): JSX.Element {
             <Route path='/convert/colors' element={<Colors />} />
             <Route path='/convert/binary-text' element={<BinaryText />} />
             <Route path='/convert/binary-number' element={<BinaryNumbers />} />
+            <Route path='/convert/lengths' element={<Lengths />} />
           </Routes>
         </div>
       </div>
