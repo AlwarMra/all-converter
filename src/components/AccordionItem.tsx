@@ -2,7 +2,7 @@ import React from 'react'
 
 interface AccordionComponent {
   title: string
-  icon?: React.ReactNode
+  icon?: JSX.Element
   selected: null | string | number
   toggle: (i: any) => void
   children: React.ReactNode
@@ -48,11 +48,11 @@ const Accordion: React.FC<AccordionComponent> = ({
           onClick={() => toggle(title)}
         >
           {icon && <span>{icon}</span>}
-          <h3 className='text-3xl'>{title}</h3>
+          <span className='text-xl'>{title}</span>
         </div>
         <div
           data-accordion={selected === title ? 'open' : 'close'}
-          className='px-2 mt-4 overflow-hidden max-h-0 transition-all duration-300 delay-400 accordion:h-auto accordion:max-h-[3000px] accordion:transition-all accordion:duration-300'
+          className='pl-4 mt-4 overflow-hidden max-h-0 transition-all duration-600 accordion:h-auto accordion:max-h-[3000px] '
         >
           {children}
         </div>

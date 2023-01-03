@@ -1,12 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Accordion from '../components/AccordionItem'
-import { PaletteIcon, BinaryIcon } from '../components/Icons'
+import AccordionItem from '../components/AccordionItem'
+import { PaletteIcon, BinaryIcon, ArrowRightIcon } from '../components/Icons'
 import Title from '../components/Title'
+import useAccordion from '../hooks/useAccordion'
 
 const Home = () => {
+  const { selected, toggleAccordion } = useAccordion()
+
   const MenuLinkClasses =
-    'inline-flex items-center gap-6 p-2 border hover:bg-slate-100'
+    'inline-flex items-center gap-6 p-2 border mb-2 hover:bg-slate-100 w-full'
 
   return (
     <div>
@@ -17,9 +20,20 @@ const Home = () => {
         <Link to='convert/colors' className={MenuLinkClasses}>
           <PaletteIcon /> <span className='text-xl'>Colors</span>
         </Link>
-        <Link to='convert/binary-text' className={MenuLinkClasses}>
-          <BinaryIcon /> <span className='text-xl'>Binary</span>
-        </Link>
+        <AccordionItem
+          title='Binary'
+          toggle={toggleAccordion}
+          selected={selected}
+          defaultValue={false}
+          icon={<BinaryIcon />}
+        >
+          <Link to='convert/binary-text' className={MenuLinkClasses}>
+            <ArrowRightIcon w={25} h={25} /> Binary to Text
+          </Link>
+          <Link to='convert/binary-number' className={MenuLinkClasses}>
+            <ArrowRightIcon w={25} h={25} /> Binary / number
+          </Link>
+        </AccordionItem>
       </div>
     </div>
   )
